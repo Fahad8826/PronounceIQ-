@@ -1,0 +1,4 @@
+Django==4.2.23
+SpeechRecognition==3.10.1
+pydub==0.25.1
+python-Levenshtein==0.25.1

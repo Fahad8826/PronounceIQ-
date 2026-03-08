@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manage Sentences — VoiceTest</title>
+<link rel="stylesheet" href="{% static 'css/base_theme.css' %}">
+</head>
+<body>
+
+<nav class="nav">
+  <span class="nav-brand">VoiceTest</span>
+  <div class="nav-right">
+    <span class="nav-username">{{ request.user.username }}</span>
+    <a href="/logout/">Logout</a>
+  </div>
+</nav>
+
+<div class="page-wide" style="margin-top: 40px;">
+
+  <a href="/" class="back-link">← Back to Home</a>
+
+  <div class="card">
+
+    <div class="row" style="justify-content: space-between; margin-bottom: 4px;">
+      <h2 style="margin-bottom: 0;">Manage Sentences</h2>
+      <a href="/add-sentence/" class="btn btn-primary">+ Add Sentence</a>
+    </div>
+
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Sentence</th>
+            <th>Language</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for s in sentences %}
+          <tr>
+            <td>{{ s.id }}</td>
+            <td>{{ s.text }}</td>
+            <td><span class="td-lang">{{ s.language }}</span></td>
+            <td>
+              <div class="td-actions">
+                <a href="/sentence/edit/{{ s.id }}/" class="btn btn-secondary btn-sm">Edit</a>
+                <a href="/sentence/delete/{{ s.id }}/"
+                   class="btn btn-danger btn-sm"
+                   onclick="return confirm('Delete this sentence?')">Delete</a>
+              </div>
+            </td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="4" style="text-align:center; color: var(--text-secondary); padding: 32px;">
+              No sentences yet. <a href="/add-sentence/" class="link">Add one</a>.
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
